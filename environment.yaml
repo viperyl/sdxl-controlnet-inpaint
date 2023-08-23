@@ -1,0 +1,8 @@
+name: hft
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip=23.2.1
+  - pip:
+    - -r requirements.txt

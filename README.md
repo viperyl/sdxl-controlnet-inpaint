@@ -8,10 +8,17 @@ Test case in `sample_code.ipynb`
 
 
 
-## Install
+## Requirements
+A suitable conda environment named `hft` can be created and activated with:
 
 ```bash
-pip install accelerate, transformers
-pip install git+https://github.com/huggingface/diffusers
+conda env create -f environment.yaml
+conda activate hft
 
+```
+
+Alternatively, upgrade your `transformers` and `accelerate` package to latest
+```bash
+pip install -U transformers
+pip install -U accelerate
 ```

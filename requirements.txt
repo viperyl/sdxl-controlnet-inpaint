@@ -1,0 +1,11 @@
+transformers == 4.32.0
+accelerate == 0.22.0
+--find-links https://download.pytorch.org/whl/nightly/cu121
+torch
+torchvision
+torchaudio
+-e git+https://github.com/huggingface/diffusers@main#egg=diffusers
+
+opencv-python
+jupyterlab
+ipywidgets
