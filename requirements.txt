@@ -7,5 +7,6 @@ torchaudio
 -e git+https://github.com/huggingface/diffusers@main#egg=diffusers
 
 opencv-python
+
 jupyterlab
 ipywidgets
