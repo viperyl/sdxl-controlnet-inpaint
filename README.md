@@ -22,3 +22,7 @@ Alternatively, upgrade your `transformers` and `accelerate` package to latest
 pip install -U transformers
 pip install -U accelerate
 ```
+
+# Result
+
+![](./assets/res.jpg)
