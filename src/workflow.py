@@ -83,3 +83,44 @@ class sdxl_inpaint_controlnet_refiner:
         
 
     
+class sdxl_inpaint_controlnet:
+    def __init__(self):
+        controlnet = ControlNetModel.from_pretrained(
+        "diffusers/controlnet-sdxl-1.0",
+        torch_dtype=torch.float16
+        )
+        vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
+        self.pipe0 = StableDiffusionXLInpaintControlNetPipeline.from_pretrained(
+            "diffusers/stable-diffusion-xl-1.0-inpainting-0.1",
+            controlnet=controlnet,
+            torch_dtype=torch.float16,
+            vae=vae
+        )
+        self.pipe0.enable_model_cpu_offload()
+
+    def __call__(self, image, mask, c_image, prompt, negative_prompt, generator, controlnet_conditioning_scale,
+                 guess_mode, guidance_scale, strength, control_guidance_start, control_guidance_end, guidance_rescale,
+                 crops_coords_top_left, aesthetic_score, negative_aesthetic_score, eta):
+        images = self.pipe0(
+            prompt, 
+            negative_prompt=negative_prompt,
+            image=image, 
+            mask_image=mask, 
+            control_image=c_image,
+            num_inference_steps=50,
+            controlnet_conditioning_scale=controlnet_conditioning_scale,
+            guess_mode = guess_mode,
+            guidance_scale = guidance_scale,
+            strength = strength,
+            control_guidance_start = control_guidance_start,
+            control_guidance_end = control_guidance_end,
+            guidance_rescale = guidance_rescale,
+            crops_coords_top_left = crops_coords_top_left,
+            aesthetic_score = aesthetic_score,
+            negative_aesthetic_score = negative_aesthetic_score,
+            eta = eta,
+            generator=generator,
+        ).images
+        
+        return image
+       
